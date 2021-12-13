@@ -25,7 +25,7 @@
     "prettier": "2.2.1"
   },
   "scripts": {
-    "start": "BASIC_AUTH_USER=admin BASIC_AUTH_PASS=admin react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
