@@ -1,6 +1,7 @@
 import React from "react";
 
 import Header from "./components/Header";
+import MediaList from "./components/MediaList";
 import styled from "styled-components";
 import "./App.css";
 
@@ -13,6 +14,7 @@ function App() {
   return (
     <Wrapper>
       <Header />
+      <MediaList />
     </Wrapper>
   );
 }
