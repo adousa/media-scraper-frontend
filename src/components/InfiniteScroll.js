@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Progress } from "reactstrap";
+import PropTypes from "prop-types";
+
 const useIntersect = ({ root = null, rootMargin, threshold = 0 }) => {
   const [entry, setEntry] = useState({});
   const [node, setNode] = useState(null);
@@ -56,6 +58,14 @@ const InfiniteScroll = ({
       )}
     </>
   );
+};
+
+InfiniteScroll.propTypes = {
+  callback: PropTypes.func,
+  canLoadMore: PropTypes.bool,
+  loaderComponent: PropTypes.any,
+  options: PropTypes.object,
+  children: PropTypes.any,
 };
 
 export default InfiniteScroll;
