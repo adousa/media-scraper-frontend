@@ -1,14 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 import Octicon from "react-octicon";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { searchMedia, getMedia } from "../state/actions/mediaActions";
 
-const Search = () => {
+const Search = ({ dispatch }) => {
+  const searchByUsername = (query) => {
+    if (query && query !== "") {
+      dispatch(searchMedia(query));
+    } else {
+      dispatch(getMedia());
+    }
+  };
+
   return (
     <Wrapper>
       <InputBox>
         <Octicon name="search" />
-        <Input placeholder="Search URLS" />
+        <Input
+          placeholder="Search URLS"
+          onChange={(e) => searchByUsername(e.target.value)}
+        />
       </InputBox>
     </Wrapper>
   );
@@ -42,4 +55,4 @@ Search.propTypes = {
   dispatch: PropTypes.func,
 };
 
-export default Search;
+export default connect()(Search);
