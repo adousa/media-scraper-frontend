@@ -32,6 +32,7 @@ export function* getMediaGenerator({ query, page, pageSize, mediaType }) {
     type: SEARCH_MEDIA_COMPLETED,
     data: (response || {}).data,
     searchQuery: query,
+    mediaType: mediaType,
     count: (response || {}).count,
     prevPage: (response || {}).prevPage,
     nextPage: (response || {}).nextPage,
