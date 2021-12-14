@@ -12,7 +12,14 @@ const cardColors = {
   img: "light",
 };
 
-function MediaList({ dispatch, data, nextPage, searchQuery, mediaType }) {
+function MediaList({
+  dispatch,
+  data,
+  nextPage,
+  searchQuery,
+  mediaType,
+  isError,
+}) {
   useEffect(() => {
     dispatch(getMedia());
   }, [dispatch]);
@@ -20,7 +27,7 @@ function MediaList({ dispatch, data, nextPage, searchQuery, mediaType }) {
     <Container>
       <Row className="mt-5">
         <InfiniteScroll
-          canLoadMore={nextPage}
+          canLoadMore={nextPage && !isError}
           callback={() => {
             if (nextPage) {
               dispatch(
