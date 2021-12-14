@@ -8,6 +8,7 @@ const initialState = {
   isError: false,
   error: undefined,
   searchQuery: undefined,
+  mediaType: undefined,
   type: SEARCH_MEDIA_COMPLETED,
   count: 0,
   prevPage: undefined,
@@ -22,6 +23,7 @@ const gistReducer = (state = initialState, action) => {
       return {
         ...state,
         searchQuery: action.searchQuery,
+        mediaType: action.mediaType,
         data: action.data,
       };
     case SEARCH_MEDIA_FAILED:

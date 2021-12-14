@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Octicon from "react-octicon";
 import { connect } from "react-redux";
@@ -6,13 +6,16 @@ import PropTypes from "prop-types";
 import { searchMedia, getMedia } from "../state/actions/mediaActions";
 
 const Search = ({ dispatch }) => {
-  const searchByUsername = (query) => {
-    if (query && query !== "") {
-      dispatch(searchMedia(query));
+  const [query, setQuery] = useState(undefined);
+  const [mediaType, setMediaType] = useState(undefined);
+
+  useEffect(() => {
+    if (query || mediaType) {
+      dispatch(searchMedia(query, 1, 15, mediaType));
     } else {
       dispatch(getMedia());
     }
-  };
+  }, [mediaType, query]);
 
   return (
     <Wrapper>
@@ -20,8 +23,13 @@ const Search = ({ dispatch }) => {
         <Octicon name="search" />
         <Input
           placeholder="Search URLS"
-          onChange={(e) => searchByUsername(e.target.value)}
+          onChange={(e) => setQuery(e.target.value)}
         />
+        <select name="type" onChange={(e) => setMediaType(e.target.value)}>
+          <option value="">All</option>
+          <option value="img">Image</option>
+          <option value="video">Video</option>
+        </select>
       </InputBox>
     </Wrapper>
   );
@@ -39,7 +47,6 @@ const Wrapper = styled.div`
 const InputBox = styled.div`
   border-radius: 4px;
   display: flex;
-  width: 400px;
 `;
 
 const Input = styled.input`

@@ -11,14 +11,14 @@ import {
 /**
  * helper function to destruct parameters
  */
-const getMedia = ({ query, page, pageSize }) => {
-  return mediaService.getMedia(query, page, pageSize);
+const getMedia = ({ query, page, pageSize, mediaType }) => {
+  return mediaService.getMedia(query, page, pageSize, mediaType);
 };
 
-export function* getMediaGenerator({ query, page, pageSize }) {
+export function* getMediaGenerator({ query, page, pageSize, mediaType }) {
   let response = [];
   try {
-    response = yield call(getMedia, { query, page, pageSize });
+    response = yield call(getMedia, { query, page, pageSize, mediaType });
   } catch (error) {
     yield put({
       type: SEARCH_MEDIA_FAILED,

@@ -9,7 +9,12 @@ const getAbsoluteUrl = (url) => {
   return `${baseURL}${url}`;
 };
 
-const getMedia = async (query, page = 1, pageSize = 15) => {
+const getMedia = async (
+  query,
+  page = 1,
+  pageSize = 15,
+  mediaType = undefined
+) => {
   const requestOptions = {
     method: "GET",
     headers: {
@@ -20,6 +25,9 @@ const getMedia = async (query, page = 1, pageSize = 15) => {
   const params = { page, pageSize };
   if (query) {
     params.search = query;
+  }
+  if (mediaType) {
+    params.mediaType = mediaType;
   }
   const queryString = new URLSearchParams(params).toString();
   return fetch(getAbsoluteUrl(`media?${queryString}`), requestOptions).then(

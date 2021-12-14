@@ -8,12 +8,13 @@ export function getMedia() {
   };
 }
 
-export function searchMedia(query, page, pageSize) {
+export function searchMedia(query, page, pageSize, mediaType) {
   return {
     type: SEARCH_MEDIA_STARTED,
     query,
     page,
     pageSize,
+    mediaType,
   };
 }
 
