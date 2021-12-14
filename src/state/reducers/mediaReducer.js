@@ -6,8 +6,14 @@ import {
 const initialState = {
   data: [],
   isError: false,
-  searchResult: [],
+  error: undefined,
   searchQuery: undefined,
+  type: SEARCH_MEDIA_COMPLETED,
+  count: 0,
+  prevPage: undefined,
+  nextPage: undefined,
+  lastPage: undefined,
+  currentPage: undefined,
 };
 
 const gistReducer = (state = initialState, action) => {
@@ -16,12 +22,13 @@ const gistReducer = (state = initialState, action) => {
       return {
         ...state,
         searchQuery: action.searchQuery,
-        searchResult: action.data,
+        data: action.data,
       };
     case SEARCH_MEDIA_FAILED:
       return {
         ...initialState,
         isError: action.isError,
+        error: state.error,
       };
     default:
       return state;

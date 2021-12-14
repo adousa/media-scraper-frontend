@@ -19,18 +19,24 @@ export function* getMediaGenerator({ query, page, pageSize }) {
   let response = [];
   try {
     response = yield call(getMedia, { query, page, pageSize });
-  } catch (errors) {
+  } catch (error) {
     yield put({
       type: SEARCH_MEDIA_FAILED,
       data: [],
+      error,
       isError: true,
     });
     return;
   }
   yield put({
     type: SEARCH_MEDIA_COMPLETED,
-    data: (response || []).data,
+    data: (response || {}).data,
     searchQuery: query,
+    count: (response || {}).count,
+    prevPage: (response || {}).prevPage,
+    nextPage: (response || {}).nextPage,
+    lastPage: (response || {}).lastPage,
+    currentPage: (response || {}).currentPage,
   });
 }
 
