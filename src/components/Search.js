@@ -3,13 +3,18 @@ import styled from "styled-components";
 import Octicon from "react-octicon";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { searchMedia, getMedia } from "../state/actions/mediaActions";
+import {
+  searchMedia,
+  getMedia,
+  clearSearch,
+} from "../state/actions/mediaActions";
 
 const Search = ({ dispatch }) => {
   const [query, setQuery] = useState(undefined);
   const [mediaType, setMediaType] = useState(undefined);
 
   useEffect(() => {
+    dispatch(clearSearch());
     if (query || mediaType) {
       dispatch(searchMedia(query, 1, 15, mediaType));
     } else {

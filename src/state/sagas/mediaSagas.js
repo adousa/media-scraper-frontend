@@ -41,5 +41,5 @@ export function* getMediaGenerator({ query, page, pageSize, mediaType }) {
 }
 
 export default function* rootSaga() {
-  yield debounce(1000, SEARCH_MEDIA_STARTED, getMediaGenerator);
+  yield debounce(500, SEARCH_MEDIA_STARTED, getMediaGenerator);
 }

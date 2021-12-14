@@ -1,4 +1,5 @@
 import {
+  CLEAR_MEDIA_COMPLETED,
   SEARCH_MEDIA_COMPLETED,
   SEARCH_MEDIA_FAILED,
 } from "../actions/mediaActions";
@@ -24,13 +25,22 @@ const gistReducer = (state = initialState, action) => {
         ...state,
         searchQuery: action.searchQuery,
         mediaType: action.mediaType,
-        data: action.data,
+        data: [...(state.data || []), ...action.data],
+        count: action.count,
+        prevPage: action.prevPage,
+        nextPage: action.nextPage,
+        lastPage: action.lastPage,
+        currentPage: action.currentPage,
       };
     case SEARCH_MEDIA_FAILED:
       return {
         ...initialState,
         isError: action.isError,
         error: state.error,
+      };
+    case CLEAR_MEDIA_COMPLETED:
+      return {
+        ...initialState,
       };
     default:
       return state;
