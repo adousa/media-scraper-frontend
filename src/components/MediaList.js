@@ -22,7 +22,11 @@ function MediaList({ dispatch, data, nextPage, searchQuery, mediaType }) {
         <InfiniteScroll
           canLoadMore={nextPage}
           callback={() => {
-            dispatch(searchMedia(searchQuery, nextPage, undefined, mediaType));
+            if (nextPage) {
+              dispatch(
+                searchMedia(searchQuery, nextPage, undefined, mediaType)
+              );
+            }
           }}
         >
           {(data || []).map((mediaItem) => (
