@@ -18,7 +18,7 @@ function MediaList({ dispatch, data }) {
   return (
     <Container>
       <Row className="mt-5">
-        {data.map((mediaItem) => (
+        {(data || []).map((mediaItem) => (
           <Card
             color={cardColors[mediaItem.type]}
             className="col-xl-2 col-lg-4 col-md-6 col-sm-12"
