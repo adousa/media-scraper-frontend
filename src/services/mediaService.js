@@ -4,6 +4,8 @@ const getHeaderAuthorization = () => {
   return `Basic ${window.btoa(`${username}:${password}`)}`;
 };
 
+const URL_MEDIA_PREFIX = "url-media";
+
 const getAbsoluteUrl = (url) => {
   const baseURL = process.env.BASE_URL || "http://localhost:3000/";
   return `${baseURL}${url}`;
@@ -30,9 +32,10 @@ const getMedia = async (
     params.mediaType = mediaType;
   }
   const queryString = new URLSearchParams(params).toString();
-  return fetch(getAbsoluteUrl(`media?${queryString}`), requestOptions).then(
-    handleResponse
-  );
+  return fetch(
+    getAbsoluteUrl(`${URL_MEDIA_PREFIX}?${queryString}`),
+    requestOptions
+  ).then(handleResponse);
 };
 
 function handleResponse(response) {
