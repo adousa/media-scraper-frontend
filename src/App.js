@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import MediaList from "./components/MediaList";
 import styled from "styled-components";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 const Wrapper = styled.div`
   font-size: 14px;
