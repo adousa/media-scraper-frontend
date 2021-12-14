@@ -9,7 +9,7 @@ const getAbsoluteUrl = (url) => {
   return `${baseURL}${url}`;
 };
 
-const getMedia = (query, page = 1, pageSize = 15) => {
+const getMedia = async (query, page = 1, pageSize = 15) => {
   const requestOptions = {
     method: "GET",
     headers: {
@@ -22,8 +22,21 @@ const getMedia = (query, page = 1, pageSize = 15) => {
     params.search = query;
   }
   const queryString = new URLSearchParams(params).toString();
-  return fetch(getAbsoluteUrl(`media?${queryString}`), requestOptions);
+  return fetch(getAbsoluteUrl(`media?${queryString}`), requestOptions).then(
+    handleResponse
+  );
 };
+
+function handleResponse(response) {
+  return response.text().then((text) => {
+    const data = text && JSON.parse(text);
+    if (!response.ok) {
+      const error = (data && data.message) || response.statusText;
+      return Promise.reject(error);
+    }
+    return data;
+  });
+}
 
 export const mediaService = {
   getMedia,
