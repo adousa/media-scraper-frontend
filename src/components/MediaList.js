@@ -1,26 +1,55 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
-import { Col, Container, Row } from "reactstrap";
+import { Card, CardBody, Container, CardText, Row } from "reactstrap";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import { getMedia } from "../state/actions/mediaActions";
+import MediaItem from "./media/MediaItem";
 
-function MediaList({ dispatch }) {
+const cardColors = {
+  video: "warning",
+  img: "light",
+};
+
+function MediaList({ dispatch, data }) {
   useEffect(() => {
     dispatch(getMedia());
   }, [dispatch]);
-
   return (
-    <Wrapper>
-      <Container>
-        <Row>
-          <Col></Col>
-        </Row>
-      </Container>
-    </Wrapper>
+    <Container>
+      <Row className="mt-5">
+        {data.map((mediaItem) => (
+          <Card
+            color={cardColors[mediaItem.type]}
+            className="col-xl-2 col-lg-4 col-md-6 col-sm-12"
+            key={mediaItem.id}
+          >
+            <CardBody>
+              <MediaItem key={mediaItem.id} mediaItem={mediaItem} />
+              <CardText className="mt-2">{mediaItem.src}</CardText>
+            </CardBody>
+          </Card>
+        ))}
+      </Row>
+    </Container>
   );
 }
 
-const Wrapper = styled.div``;
+MediaList.propTypes = {
+  dispatch: PropTypes.func,
+  data: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.any])),
+  error: PropTypes.string,
+  nextPage: PropTypes.number,
+  lastPage: PropTypes.number,
+  prevPage: PropTypes.number,
+  count: PropTypes.number,
+  isError: PropTypes.bool,
+};
 
-export default connect()(MediaList);
+const mapStateToProps = (state) => {
+  return {
+    ...state.mediaData,
+  };
+};
+
+export default connect(mapStateToProps)(MediaList);
