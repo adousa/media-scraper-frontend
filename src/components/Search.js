@@ -20,7 +20,7 @@ const Search = ({ dispatch }) => {
     } else {
       dispatch(getMedia());
     }
-  }, [mediaType, query]);
+  }, [mediaType, query, dispatch]);
 
   return (
     <Wrapper>

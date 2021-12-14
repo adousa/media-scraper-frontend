@@ -42,7 +42,7 @@ const InfiniteScroll = ({
     if (entry.isIntersecting) {
       callback();
     }
-  }, [entry]);
+  }, [entry, callback]);
 
   return (
     <>
